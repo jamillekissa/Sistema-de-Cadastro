@@ -269,6 +269,37 @@ void listar_cadastro(Users users[], int num_user){
     }
 }
 
+void salvar_txt(Users users[], int num_user){
+	int i;
+	FILE *arquivo = fopen("usuario.txt", "w");
+	
+	if(arquivo == NULL){
+		printf("Arquivo não encontrado!");
+	}
+	else {
+		for(i = 0; i <= num_user; i++){
+			fprintf(arquivo, "ID: %d\n", users[i].id);
+        	fprintf(arquivo, "Nome: %s\n", users[i].nome);
+        	fprintf(arquivo, "Idade: %d\n", users[i].idade);
+        	fprintf(arquivo, "Email: %s\n", users[i].email);
+        	fprintf(arquivo, "Profissão: %s\n", users[i].profissao);
+        	fprintf(arquivo, "Celular: %d\n", users[i].cel);
+        	fprintf(arquivo, "Renda mensal: %.2lf\n", users[i].renda);
+        	fprintf(arquivo, "Quantidade de pessoas: %d\n", users[i].qtde_pessoas);
+        	fprintf(arquivo, "CEP: %d\n", users[i].cep);
+        	fprintf(arquivo, "Rua: %s\n", users[i].rua);
+        	fprintf(arquivo, "Bairro: %s\n", users[i].bairro);
+        	fprintf(arquivo, "Número da casa/apartamento: %d\n", users[i].num_casa);
+        	fprintf(arquivo, "Complemento: %s\n", users[i].complemento);
+        	fprintf(arquivo, "Nome de usuário: %s\n", users[i].nome_user);
+        	fprintf(arquivo, "Senha: %s\n", users[i].senha);
+        	fprintf(arquivo, "-------------------\n");
+		}
+		fclose(arquivo);
+		printf("Dados cadastrados com sucesso!");
+	}
+}
+
 int main(){
 	int num_user = 0;
 	int opcao;
@@ -281,7 +312,8 @@ int main(){
 		printf("\n3. Recuperar senha");
 		printf("\n4. Editar dados");
 		printf("\n5. Listar cadastros");
-		printf("\n6. Sair");
+		printf("\n6. Salvar em um arquivo txt");
+		printf("\n7. Sair");
 		printf("-------------------");
 		printf("\nDigite sua opcao: ");
 		scanf("%d", &opcao);
@@ -311,6 +343,9 @@ int main(){
 				listar_cadastro(users, num_user);
 				break;
 			case 6:
+				salvar_txt(users, num_user);
+				break;
+			case 7:
 				break;
 			default:
 				printf("\nDigite uma opcao valida!");
