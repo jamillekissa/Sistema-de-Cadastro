@@ -42,7 +42,7 @@ void cadastrar_user(Users users[], int *num_user){
     scanf("%s", users[*num_user].profissao);
     printf("Celular: ");
     scanf("%d", &users[*num_user].cel);
-    printf("Renda mensal: ");
+    printf("Renda mensal (Digite com ponto como separador): ");
     scanf("%lf", &users[*num_user].renda);
     printf("Quantidade de pessoas que moram com você (incluindo você): ");
     scanf("%d", &users[*num_user].qtde_pessoas);
@@ -52,11 +52,11 @@ void cadastrar_user(Users users[], int *num_user){
     scanf("%s", &users[*num_user].rua);
     printf("Bairro: ");
     scanf("%s", &users[*num_user].bairro);
-    printf("Número da casa/apartamento: ");
+    printf("Numero da casa/apartamento: ");
     scanf("%d", &users[*num_user].num_casa);
     printf("Complemento: ");
     scanf("%s", &users[*num_user].complemento);
-    printf("Nome de usuário: ");
+    printf("Nome de usuario: ");
     scanf("%s", &users[*num_user].nome_user);
     printf("Senha: ");
     scanf("%s", &users[*num_user].senha);
@@ -147,6 +147,127 @@ void recuperar_senha(Users users[], int num_user){
 	}
 }
 
+void editar_dados(Users users[], int num_user){
+	char nome_user[50];
+    int i, opcao;
+
+    printf("Informe o nome de usuário que deseja editar: ");
+    scanf("%s", nome_user);
+
+    for (i = 0; i < num_user; i++) {
+        if (strcmp(users[i].nome_user, nome_user) == 0) {
+            printf("\nUsuário encontrado. Escolha o que deseja editar:");
+            printf("\n1. Nome");
+            printf("\n2. Idade");
+            printf("\n3. Email");
+            printf("\n4. Profissão");
+            printf("\n5. Celular");
+            printf("\n6. Renda mensal");
+            printf("\n7. Quantidade de pessoas");
+            printf("\n8. CEP");
+            printf("\n9. Rua");
+            printf("\n10. Bairro");
+            printf("\n11. Número da casa/apartamento");
+            printf("\n12. Complemento");
+            printf("\n13. Senha");
+            printf("\nOpção: ");
+            scanf("%d", &opcao);
+
+            switch (opcao) {
+                case 1:
+                    printf("Nome atual: %s\n", users[i].nome);
+                    printf("Novo nome: ");
+                    scanf("%s", users[i].nome);
+                    break;
+                case 2:
+                    printf("Idade atual: %d\n", users[i].idade);
+                    printf("Nova idade: ");
+                    scanf("%d", &users[i].idade);
+                    break;
+                case 3:
+                    printf("Email atual: %s\n", users[i].email);
+                    printf("Novo email: ");
+                    scanf("%s", users[i].email);
+                    break;
+                case 4:
+                    printf("Profissão atual: %s\n", users[i].profissao);
+                    printf("Nova profissão: ");
+                    scanf("%s", users[i].profissao);
+                    break;
+                case 5:
+                    printf("Celular atual: %d\n", users[i].cel);
+                    printf("Novo celular: ");
+                    scanf("%d", &users[i].cel);
+                    break;
+                case 6:
+                    printf("Renda mensal atual: %.2lf\n", users[i].renda);
+                    printf("Nova renda mensal: ");
+                    scanf("%lf", &users[i].renda);
+                    break;
+                case 7:
+                    printf("Quantidade de pessoas atual: %d\n", users[i].qtde_pessoas);
+                    printf("Nova quantidade de pessoas: ");
+                    scanf("%d", &users[i].qtde_pessoas);
+                    break;
+                case 8:
+                    printf("CEP atual: %d\n", users[i].cep);
+                    printf("Novo CEP: ");
+                    scanf("%d", &users[i].cep);
+                    break;
+                case 9:
+                    printf("Rua atual: %s\n", users[i].rua);
+                    printf("Nova rua: ");
+                    scanf("%s", users[i].rua);
+                    break;
+                case 10:
+                    printf("Bairro atual: %s\n", users[i].bairro);
+                    printf("Novo bairro: ");
+                    scanf("%s", users[i].bairro);
+                    break;
+                case 11:
+                    printf("Número da casa/apartamento atual: %d\n", users[i].num_casa);
+                    printf("Novo número da casa/apartamento: ");
+                    scanf("%d", &users[i].num_casa);
+                    break;
+                case 12:
+                    printf("Complemento atual: %s\n", users[i].complemento);
+                    printf("Novo complemento: ");
+                    scanf("%s", users[i].complemento);
+                    break;
+                case 13:
+                    printf("Senha atual: %s\n", users[i].senha);
+                    printf("Nova senha: ");
+                    scanf("%s", users[i].senha);
+                    break;
+                default:
+                    printf("Opção inválida!\n");
+                    break;
+            }
+            printf("Dados atualizados com sucesso!\n");
+            return;
+		}	
+	}
+}
+
+void listar_cadastro(Users users[], int num_user){
+	int i;
+    for (i = 0; i < num_user; i++) {
+        printf("\nID: %d", users[i].id);
+        printf("\nNome: %s", users[i].nome);
+        printf("\nIdade: %d", users[i].idade);
+        printf("\nEmail: %s", users[i].email);
+        printf("\nProfissão: %s", users[i].profissao);
+        printf("\nCelular: %d", users[i].cel);
+        printf("\nRenda mensal: %.2lf", users[i].renda);
+        printf("\nQuantidade de pessoas que moram com você (incluindo você): %d", users[i].qtde_pessoas);
+        printf("\nCEP: %d", users[i].cep);
+        printf("\nRua: %s", users[i].rua);
+        printf("\nBairro: %s", users[i].bairro);
+        printf("\nNúmero da casa/apartamento: %d", users[i].num_casa);
+        printf("\nComplemento: %s", users[i].complemento);
+        printf("\nNome de usuário: %s\n", users[i].nome_user);
+    }
+}
 
 int main(){
 	int num_user = 0;
@@ -184,8 +305,10 @@ int main(){
 				system("cls");
 				break;
 			case 4:
+				editar_dados(users, num_user);
 				break;
 			case 5:
+				listar_cadastro(users, num_user);
 				break;
 			case 6:
 				break;
